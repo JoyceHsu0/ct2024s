@@ -22,7 +22,7 @@
     </style>
 </head>
 <body>
-    <img src="src/compare_plot/hsu.png" height="150" width="150">
+    <img src="./112598016.jpg" height="150" width="150">
     <script>
         // 设定SVG大小
         var margin = {top: 10, right: 30, bottom: 30, left: 60},
@@ -37,11 +37,11 @@
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         // 加载CSV数据
-        d3.csv("src/results.csv").then(function(data) {
+        d3.csv("../results.csv").then(function(data) {
 
             // 设置X轴比例尺
             var x = d3.scaleLinear()
-                .domain([0.45, 0.65]) // ssim
+                .domain([0.75, 0.9]) // ssim
                 .range([ 0, width ]);
             svg.append("g")
                 .attr("transform", "translate(0," + height + ")")
@@ -60,7 +60,7 @@
 
             // 设置Y轴比例尺
             var y = d3.scaleLinear()
-                .domain([0.35, 0.60]) // lpips
+                .domain([0.45, 0.53]) // lpips
                 .range([ height, 0]);
             svg.append("g")
                 .call(d3.axisLeft(y));
@@ -78,7 +78,7 @@
                 .text("LPIPS");
 
             var filteredData = data.filter(function(d) {
-                return d.SSIM >= 0.45 && d.SSIM <= 0.65 && d.LPIPS >= 0.35 && d.LPIPS <= 0.60;
+                return d.SSIM >= 0.45 && d.SSIM <= 0.95 && d.LPIPS >= 0.35 && d.LPIPS <= 0.60;
             });
 
             // 创建散点
@@ -103,7 +103,7 @@
                     tooltip.transition()
                         .duration(200)
                         .style("opacity", .9);
-                    tooltip.html("<img src='src/hsieh/" + d.Student + "' alt='Handwriting' width='120' height='120'>")
+                    tooltip.html("<img src='./" + d.Student + "' alt='Handwriting' width='120' height='120'>")
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
                 })
